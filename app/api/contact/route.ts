@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const RECIPIENTS = [
   'ganchieta@gmail.com',
   'gabriel.anchieta@gdataconsulting.com.br',
@@ -20,6 +18,7 @@ const SERVICE_LABELS: Record<string, string> = {
 
 export async function POST(req: NextRequest) {
   try {
+    const resend = new Resend(process.env.RESEND_API_KEY);
     const body = await req.json();
     const { name, email, company, phone, service, message } = body;
 
