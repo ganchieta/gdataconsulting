@@ -149,11 +149,9 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ success: true }, { status: 200 });
-  } catch (error) {
-    console.error('Erro ao enviar e-mail:', error);
-    return NextResponse.json(
-      { error: 'Erro ao enviar mensagem. Tente novamente.' },
-      { status: 500 }
-    );
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : String(error);
+    console.error('Erro ao enviar e-mail:', msg);
+    return NextResponse.json({ error: msg }, { status: 500 });
   }
 }
