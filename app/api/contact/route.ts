@@ -1,11 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const RECIPIENTS = [
-  'ganchieta@gmail.com',
-  'gabriel.anchieta@gdataconsulting.com.br',
-  'contato@gdataconsulting.com.br',
-];
+// Após verificar o domínio no Resend, adicione os outros e-mails aqui
+const RECIPIENTS = ['ganchieta@gmail.com'];
 
 const SERVICE_LABELS: Record<string, string> = {
   engenharia: '🏗️ Engenharia de Dados',
