@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 
-// Após verificar o domínio no Resend, adicione os outros e-mails aqui
-const RECIPIENTS = ['ganchieta@gmail.com'];
+const RECIPIENTS = ['contato@gdataconsulting.com.br'];
 
 const SERVICE_LABELS: Record<string, string> = {
   engenharia: '🏗️ Engenharia de Dados',
@@ -13,9 +12,18 @@ const SERVICE_LABELS: Record<string, string> = {
   outros: 'Outros',
 };
 
+const transporter = nodemailer.createTransport({
+  host: 'smtp.zoho.com',
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.ZOHO_SMTP_USER,
+    pass: process.env.ZOHO_SMTP_PASS,
+  },
+});
+
 export async function POST(req: NextRequest) {
   try {
-    const resend = new Resend(process.env.RESEND_API_KEY);
     const body = await req.json();
     const { name, email, company, phone, service, message } = body;
 
@@ -29,8 +37,8 @@ export async function POST(req: NextRequest) {
     const serviceLabel = SERVICE_LABELS[service] || service;
     const now = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
 
-    await resend.emails.send({
-      from: 'GDATA Consulting <onboarding@resend.dev>',
+    await transporter.sendMail({
+      from: `"GDATA Consulting" <${process.env.ZOHO_SMTP_USER}>`,
       to: RECIPIENTS,
       replyTo: email,
       subject: `📬 Novo contato: ${name} — ${serviceLabel}`,

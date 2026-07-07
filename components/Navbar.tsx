@@ -40,6 +40,16 @@ export default function Navbar() {
             <li><a href="#contato" onClick={(e) => { e.preventDefault(); scrollTo('contato'); }}>Contato</a></li>
             <li>
               <a
+                href="https://app.gdataconsulting.com.br/login"
+                className="navbar-login"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Login
+              </a>
+            </li>
+            <li>
+              <a
                 href="#contato"
                 className="navbar-cta"
                 onClick={(e) => { e.preventDefault(); scrollTo('contato'); }}
@@ -65,6 +75,14 @@ export default function Navbar() {
           <a href="#sobre" onClick={(e) => { e.preventDefault(); scrollTo('sobre'); }}>Sobre</a>
           <a href="#resultados" onClick={(e) => { e.preventDefault(); scrollTo('resultados'); }}>Resultados</a>
           <a href="#contato" onClick={(e) => { e.preventDefault(); scrollTo('contato'); }}>Contato</a>
+          <a
+            href="https://app.gdataconsulting.com.br/login"
+            className="mobile-menu-login"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Login
+          </a>
         </div>
       </nav>
     </header>
