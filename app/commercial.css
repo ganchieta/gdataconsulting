@@ -662,9 +662,6 @@ section[id] { scroll-margin-top: 84px; }
 .founders-dots i.taken { background: rgba(143, 170, 200, 0.2); }
 .founders-cta-note { font-size: 13px; color: var(--text-secondary); }
 
-.hero-trust-link { display: inline-flex; align-items: center; gap: 8px; color: var(--primary-bright); font-weight: 600; }
-.hero-trust-link:hover { color: var(--text-primary); }
-.hero-trust-link svg { color: var(--accent); }
 
 .privacy-note a { color: var(--primary-bright); text-decoration: underline; }
 .footer-bottom p a[href='/privacidade'] { color: var(--text-secondary); font-weight: 500; }

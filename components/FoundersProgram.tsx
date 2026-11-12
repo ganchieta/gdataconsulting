@@ -13,11 +13,11 @@ export default function FoundersProgram({ ctaHref = '/#contato', location = 'hom
           <div className="founders-text">
             <div className="section-tag">Programa Clientes Fundadores</div>
             <h2>
-              {totalSpots} vagas com <span className="gradient-text">desenvolvimento sem custo</span>
+              {totalSpots} vagas para <span className="gradient-text">construir com a GDATA</span>
             </h2>
             <p>
               Estamos selecionando {totalSpots} empresas para construir, junto com a GDATA, as automações
-              do seu negócio. Para elas, o desenvolvimento sob medida não é cobrado.
+              do seu negócio, com condições especiais para quem chega primeiro.
             </p>
             <ul className="offer-list">
               {benefits.map((b) => (

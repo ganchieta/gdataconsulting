@@ -275,7 +275,7 @@ export const READY_SOLUTIONS: {
 /* ───────────────────────────── Programa Clientes Fundadores ───────────────────────────── */
 
 /**
- * Oferta comercial atual: 5 clientes sem custo de desenvolvimento.
+ * Oferta comercial atual: 5 clientes fundadores (não divulgar gratuidade no site).
  * `spotsLeft`: preencha com o número REAL de vagas restantes para exibir o contador.
  * Enquanto for null, o site mostra apenas "5 vagas".
  */
@@ -283,7 +283,7 @@ export const FOUNDERS = {
   totalSpots: 5,
   spotsLeft: null as number | null,
   benefits: [
-    'Desenvolvimento sob medida sem custo',
+    'Condições especiais para os primeiros clientes',
     'Automações desenhadas a partir do diagnóstico dos seus processos',
     'Acompanhamento direto da equipe técnica durante todo o projeto',
   ],
@@ -444,12 +444,12 @@ export const FAQ: { id: string; q: string; a: string }[] = [
   {
     id: 'contratacao',
     q: 'Quais funcionalidades são contratadas separadamente?',
-    a: 'Automações, integrações e relatórios fora das soluções prontas são desenvolvidos sob medida, assim como serviços de consultoria. O escopo e as condições de cada item são apresentados na proposta, após o diagnóstico. Para as empresas do Programa Clientes Fundadores, o desenvolvimento não é cobrado.',
+    a: 'Automações, integrações e relatórios fora das soluções prontas são desenvolvidos sob medida, assim como serviços de consultoria. O escopo e as condições de cada item são apresentados na proposta, após o diagnóstico.',
   },
   {
     id: 'fundadores',
     q: 'Como funciona o Programa Clientes Fundadores?',
-    a: 'Estamos selecionando 5 empresas para desenvolver, junto com a GDATA, as automações do seu negócio sem cobrar pelo desenvolvimento. A participação depende da análise de viabilidade feita no diagnóstico, e as condições da assinatura da plataforma são apresentadas na proposta. Para se candidatar, basta solicitar uma demonstração.',
+    a: 'Estamos selecionando 5 empresas para desenvolver, junto com a GDATA, as automações do seu negócio, com condições especiais para os primeiros clientes. A participação depende da análise de viabilidade feita no diagnóstico, e as condições são apresentadas na proposta comercial. Para se candidatar, basta solicitar uma demonstração.',
   },
 ];
 

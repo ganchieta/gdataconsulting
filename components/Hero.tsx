@@ -137,11 +137,6 @@ export default function Hero() {
           <ul className="hero-trust">
             <li><Icon name="check" size={16} /> Demonstração gratuita</li>
             <li><Icon name="check" size={16} /> Diagnóstico inicial sem compromisso</li>
-            <li>
-              <a href="#fundadores" className="hero-trust-link">
-                <Icon name="rocket" size={16} /> Desenvolvimento sem custo para 5 clientes fundadores
-              </a>
-            </li>
           </ul>
         </div>
 

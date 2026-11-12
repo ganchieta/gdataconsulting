@@ -88,7 +88,7 @@ Todo o texto comercial está em **`lib/content.ts`**. As páginas de campanha s�
 
 ### Soluções prontas e Programa Clientes Fundadores
 - `READY_SOLUTIONS`: soluções já desenvolvidas (automóveis, imóveis, recepcionista virtual). Preencha `highlights` com o que cada uma faz.
-- `FOUNDERS`: oferta de 5 vagas com desenvolvimento sem custo. Preencha `spotsLeft` com o número **real** de vagas restantes para exibir o contador.
+- `FOUNDERS`: oferta de 5 vagas para clientes fundadores (o site não divulga gratuidade). Preencha `spotsLeft` com o número **real** de vagas restantes para exibir o contador.
 - CTAs podem pré-selecionar a necessidade no formulário: `/?necessidade=imoveis#contato`.
 
 ### Marcar o que já existe na plataforma
