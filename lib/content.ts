@@ -151,7 +151,7 @@ export const SOLUTIONS: Solution[] = [
         { title: 'Dados em várias planilhas', desc: 'Receitas, despesas e contas espalhadas em arquivos e sistemas diferentes.' },
         { title: 'Visão tardia do resultado', desc: 'A diretoria só enxerga o desempenho depois que o mês acabou.' },
       ],
-      faqIds: ['fundadores', 'erp', 'implantacao', 'contratacao'],
+      faqIds: ['erp', 'implantacao', 'contratacao'],
     },
   },
   {
@@ -187,7 +187,7 @@ export const SOLUTIONS: Solution[] = [
         { title: 'Dados divergentes', desc: 'Cada sistema mostra um número diferente para a mesma informação.' },
         { title: 'Dependência de pessoas-chave', desc: 'Processos que só funcionam quando aquela pessoa está disponível.' },
       ],
-      faqIds: ['fundadores', 'erp', 'integra', 'contratacao'],
+      faqIds: ['erp', 'integra', 'contratacao'],
     },
   },
   {
@@ -223,7 +223,7 @@ export const SOLUTIONS: Solution[] = [
         { title: 'Falta de indicadores', desc: 'A gestão não tem métricas claras para acompanhar a operação.' },
         { title: 'Decisões por intuição', desc: 'Sem dados consolidados, as decisões dependem de percepção.' },
       ],
-      faqIds: ['fundadores', 'integra', 'implantacao', 'contratacao'],
+      faqIds: ['integra', 'implantacao', 'contratacao'],
     },
   },
 ];
@@ -271,25 +271,6 @@ export const READY_SOLUTIONS: {
     highlights: [],
   },
 ];
-
-/* ───────────────────────────── Programa Clientes Fundadores ───────────────────────────── */
-
-/**
- * Oferta comercial atual: 5 clientes fundadores (não divulgar gratuidade no site).
- * `spotsLeft`: preencha com o número REAL de vagas restantes para exibir o contador.
- * Enquanto for null, o site mostra apenas "5 vagas".
- */
-export const FOUNDERS = {
-  totalSpots: 5,
-  spotsLeft: null as number | null,
-  benefits: [
-    'Condições especiais para os primeiros clientes',
-    'Automações desenhadas a partir do diagnóstico dos seus processos',
-    'Acompanhamento direto da equipe técnica durante todo o projeto',
-  ],
-  terms:
-    'Vagas limitadas a 5 empresas. A participação depende da análise de viabilidade feita no diagnóstico. As condições da assinatura da plataforma são apresentadas na proposta comercial.',
-};
 
 /* ───────────────────────────── Demonstrações ───────────────────────────── */
 
@@ -445,11 +426,6 @@ export const FAQ: { id: string; q: string; a: string }[] = [
     id: 'contratacao',
     q: 'Quais funcionalidades são contratadas separadamente?',
     a: 'Automações, integrações e relatórios fora das soluções prontas são desenvolvidos sob medida, assim como serviços de consultoria. O escopo e as condições de cada item são apresentados na proposta, após o diagnóstico.',
-  },
-  {
-    id: 'fundadores',
-    q: 'Como funciona o Programa Clientes Fundadores?',
-    a: 'Estamos selecionando 5 empresas para desenvolver, junto com a GDATA, as automações do seu negócio, com condições especiais para os primeiros clientes. A participação depende da análise de viabilidade feita no diagnóstico, e as condições são apresentadas na proposta comercial. Para se candidatar, basta solicitar uma demonstração.',
   },
 ];
 

@@ -3,7 +3,6 @@ import Hero from '@/components/Hero';
 import Problems from '@/components/Problems';
 import Solutions from '@/components/Solutions';
 import ReadySolutions from '@/components/ReadySolutions';
-import FoundersProgram from '@/components/FoundersProgram';
 import DemoShowcase from '@/components/DemoShowcase';
 import HowItWorks from '@/components/HowItWorks';
 import Integrations from '@/components/Integrations';
@@ -36,7 +35,6 @@ export default function Home() {
         <Differentials />
         <Services />
         <About />
-        <FoundersProgram />
         <Contact />
         <FAQ />
       </main>

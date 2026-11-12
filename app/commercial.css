@@ -613,56 +613,6 @@ section[id] { scroll-margin-top: 84px; }
 .ready-cta { margin-top: auto; }
 .ready-card .benefit-list { margin-bottom: 8px; }
 
-/* ---------- Programa Clientes Fundadores ---------- */
-.founders { background: var(--bg-dark); }
-.founders-card {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 56px;
-  align-items: center;
-  padding: 56px;
-  border-radius: var(--radius-xl);
-  background:
-    radial-gradient(ellipse at 100% 0%, rgba(0, 180, 216, 0.14), transparent 60%),
-    var(--gradient-card);
-  border: 1px solid var(--border-glow);
-  box-shadow: var(--shadow-card), var(--shadow-glow);
-  overflow: hidden;
-}
-.founders-text h2 { font-size: clamp(30px, 3.6vw, 44px); font-weight: 800; margin-bottom: 16px; }
-.founders-text > p { font-size: 17px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 28px; }
-.founders-text .offer-list { margin-bottom: 24px; }
-.founders-terms { font-size: 13px !important; color: var(--text-secondary); margin: 0 !important; }
-.founders-cta {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  padding: 36px 28px;
-  border-radius: var(--radius-lg);
-  background: rgba(2, 9, 23, 0.55);
-  border: 1px solid var(--border-hover);
-  text-align: center;
-}
-.founders-spots { display: flex; flex-direction: column; align-items: center; }
-.founders-spots-num {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 72px;
-  font-weight: 800;
-  line-height: 1;
-  background: var(--gradient-blue);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.founders-spots-label { font-size: 14px; color: var(--text-secondary); margin-top: 6px; }
-.founders-dots { display: flex; gap: 8px; }
-.founders-dots i { width: 28px; height: 6px; border-radius: 3px; background: var(--gradient-blue); }
-.founders-dots i.taken { background: rgba(143, 170, 200, 0.2); }
-.founders-cta-note { font-size: 13px; color: var(--text-secondary); }
-
-
 .privacy-note a { color: var(--primary-bright); text-decoration: underline; }
 .footer-bottom p a[href='/privacidade'] { color: var(--text-secondary); font-weight: 500; }
 
@@ -681,12 +631,9 @@ section[id] { scroll-margin-top: 84px; }
 
 @media (max-width: 1024px) {
   .ready-grid { grid-template-columns: 1fr 1fr; }
-  .founders-card { grid-template-columns: 1fr; padding: 40px 32px; gap: 36px; }
 }
 @media (max-width: 768px) {
   .ready-grid { grid-template-columns: 1fr; }
-  .founders-card { padding: 32px 20px; }
   .legal { padding: 120px 0 72px; }
 }
 
-.founders-cta .btn-lg { padding: 16px 20px; white-space: nowrap; }

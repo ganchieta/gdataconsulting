@@ -41,7 +41,6 @@ export default function Contact({
               <li><Icon name="check" size={18} strokeWidth={2.4} /> Conversa de diagnóstico sobre seus processos</li>
               <li><Icon name="check" size={18} strokeWidth={2.4} /> Demonstração da plataforma com foco na sua necessidade</li>
               <li><Icon name="check" size={18} strokeWidth={2.4} /> Mapeamento das oportunidades de automação</li>
-              <li><Icon name="rocket" size={18} strokeWidth={2} /> Candidatura ao Programa Clientes Fundadores</li>
             </ul>
 
             <div className="contact-items">

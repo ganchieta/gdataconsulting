@@ -13,7 +13,6 @@ import Icon from '@/components/Icon';
 import JsonLd from '@/components/JsonLd';
 import SectionHeader from '@/components/SectionHeader';
 import TrackedLink from '@/components/TrackedLink';
-import FoundersProgram from '@/components/FoundersProgram';
 import { AVAILABILITY_NOTE, SOLUTIONS, getDemo, getFaq, getSolution } from '@/lib/content';
 import { SITE_NAME, SITE_URL } from '@/lib/site';
 
@@ -143,8 +142,6 @@ export default function SolutionPage({ params }: { params: { slug: string } }) {
 
         <HowItWorks />
         {s.slug === 'integracao-de-sistemas' && <Integrations />}
-
-        <FoundersProgram ctaHref="#demonstracao" location={`lp_${s.slug}`} />
 
         <Contact id="demonstracao" defaultNeed={s.need} location={`lp_${s.slug}`} title="Agende sua demonstração de" highlight={`${s.title}.`} />
 

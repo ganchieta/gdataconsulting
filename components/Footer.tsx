@@ -41,7 +41,6 @@ export default function Footer() {
                 </li>
               ))}
               <li><Link href="/#segmentos">Soluções prontas</Link></li>
-              <li><Link href="/#fundadores">Clientes Fundadores</Link></li>
               <li><Link href="/#demonstracoes">Demonstrações</Link></li>
               <li><Link href="/#contato">Agendar Demonstração</Link></li>
               <li><PlatformLoginLink location="footer">Acessar Plataforma</PlatformLoginLink></li>
