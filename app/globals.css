@@ -8,6 +8,8 @@
   --primary-dark: #0d47a1;
   --accent: #00b4d8;
   --accent-glow: rgba(0, 180, 216, 0.3);
+  --accent-light: #64b5f6;
+  --danger: #f87171;
 
   --bg-base: #020917;
   --bg-dark: #030d1f;
@@ -292,12 +294,12 @@ a {
 .navbar-nav {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 2px;
   list-style: none;
 }
 
 .navbar-nav a {
-  padding: 8px 16px;
+  padding: 8px 12px;
   font-size: 14px;
   font-weight: 500;
   color: var(--text-secondary);
@@ -311,7 +313,11 @@ a {
 }
 
 .navbar-login {
-  padding: 8px 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  padding: 8px 16px;
   border: 1.5px solid rgba(65, 165, 245, 0.4);
   color: var(--accent-light) !important;
   border-radius: var(--radius-sm);
@@ -344,7 +350,8 @@ a {
 }
 
 .navbar-cta {
-  padding: 10px 24px;
+  white-space: nowrap;
+  padding: 10px 20px;
   background: var(--gradient-primary);
   color: #fff !important;
   border-radius: var(--radius-sm);

@@ -89,22 +89,24 @@ export default function Services() {
     <section className="services" id="servicos">
       <div className="container">
         <div className="services-header">
-          <div className="section-tag">Nossos Serviços</div>
+          <div className="section-tag">Consultoria e serviços técnicos</div>
           <h2>
-            Soluções completas em{' '}
+            Expertise em{' '}
             <span className="gradient-text">dados e tecnologia</span>
           </h2>
           <p>
-            Do dado bruto à decisão estratégica — cobrimos toda a jornada com expertise
-            e comprometimento com resultados reais.
+            Além da plataforma, nossa equipe atua em projetos de engenharia de dados, automação,
+            analytics, consultoria e outsourcing — do dado bruto à decisão estratégica.
           </p>
         </div>
 
         {/* Tab Navigation */}
-        <div className="services-tabs">
+        <div className="services-tabs" role="group" aria-label="Serviços de consultoria">
           {services.map((s) => (
             <button
               key={s.id}
+              type="button"
+              aria-pressed={activeId === s.id}
               className={`service-tab ${activeId === s.id ? 'active' : ''}`}
               onClick={() => setActiveId(s.id)}
             >
@@ -134,10 +136,16 @@ export default function Services() {
           </div>
 
           <div className="service-visual">
-            <div className="service-card-visual">
+            <div className="service-card-visual" aria-hidden="true">
               <span className="emoji">{active.emoji}</span>
             </div>
           </div>
+        </div>
+
+        <div className="section-cta">
+          <a href="#contato" className="btn-outline">
+            Falar com um especialista
+          </a>
         </div>
       </div>
     </section>

@@ -2,87 +2,103 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import TrackedLink, { PlatformLoginLink } from '@/components/TrackedLink';
+import Icon from '@/components/Icon';
+
+/**
+ * Links usam "/#secao" para funcionar tanto na homepage quanto nas páginas
+ * de soluções. As âncoras originais (#servicos, #sobre, #resultados, #contato)
+ * continuam existindo na homepage.
+ */
+const NAV_LINKS = [
+  { href: '/#inicio', label: 'Início' },
+  { href: '/#plataforma', label: 'Plataforma' },
+  { href: '/#solucoes', label: 'Soluções' },
+  { href: '/#demonstracoes', label: 'Demonstrações' },
+  { href: '/#servicos', label: 'Consultoria' },
+  { href: '/#contato', label: 'Contato' },
+];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 30);
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollTo = (id: string) => {
-    setMenuOpen(false);
-    const el = document.getElementById(id);
-    if (el) {
-      const offset = 80;
-      const top = el.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
-  };
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setMenuOpen(false);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [menuOpen]);
+
+  const close = () => setMenuOpen(false);
 
   return (
     <header>
-      <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+      <nav className={`navbar ${scrolled || menuOpen ? 'scrolled' : ''}`} aria-label="Navegação principal">
         <div className="container navbar-inner">
-          <div className="navbar-logo">
-            <Image src="/logo.jpg" alt="GDATA Consulting" height={44} width={140} style={{ objectFit: 'contain' }} />
-          </div>
+          <Link href="/" className="navbar-logo" aria-label="GDATA Consulting — página inicial" onClick={close}>
+            <Image src="/logo.jpg" alt="GDATA Consulting" height={44} width={140} style={{ objectFit: 'contain' }} priority />
+          </Link>
 
           <ul className="navbar-nav">
-            <li><a href="#servicos" onClick={(e) => { e.preventDefault(); scrollTo('servicos'); }}>Serviços</a></li>
-            <li><a href="#sobre" onClick={(e) => { e.preventDefault(); scrollTo('sobre'); }}>Sobre</a></li>
-            <li><a href="#resultados" onClick={(e) => { e.preventDefault(); scrollTo('resultados'); }}>Resultados</a></li>
-            <li><a href="#contato" onClick={(e) => { e.preventDefault(); scrollTo('contato'); }}>Contato</a></li>
+            {NAV_LINKS.map((l) => (
+              <li key={l.href}>
+                <Link href={l.href}>{l.label}</Link>
+              </li>
+            ))}
             <li>
-              <a
-                href="https://app.gdataconsulting.com.br/login"
-                className="navbar-login"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Login
-              </a>
+              <PlatformLoginLink className="navbar-login" location="navbar">
+                <Icon name="login" size={16} />
+                Acessar Plataforma
+              </PlatformLoginLink>
             </li>
             <li>
-              <a
-                href="#contato"
-                className="navbar-cta"
-                onClick={(e) => { e.preventDefault(); scrollTo('contato'); }}
-              >
-                Fale Conosco
-              </a>
+              <TrackedLink href="/#contato" event="cta_demo_click" location="navbar" className="navbar-cta">
+                Agendar Demonstração
+              </TrackedLink>
             </li>
           </ul>
 
-          <button
-            className={`hamburger ${menuOpen ? 'open' : ''}`}
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Menu"
-          >
-            <span />
-            <span />
-            <span />
-          </button>
+          <div className="navbar-mobile-actions">
+            {/* Acesso à plataforma sempre visível no mobile, fora do menu */}
+            <PlatformLoginLink className="navbar-login navbar-login-compact" location="navbar_mobile_bar" ariaLabel="Acessar Plataforma">
+              <Icon name="login" size={16} />
+              <span>Acessar</span>
+            </PlatformLoginLink>
+            <button
+              className={`hamburger ${menuOpen ? 'open' : ''}`}
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
+            >
+              <span />
+              <span />
+              <span />
+            </button>
+          </div>
         </div>
 
-        <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
-          <a href="#servicos" onClick={(e) => { e.preventDefault(); scrollTo('servicos'); }}>Serviços</a>
-          <a href="#sobre" onClick={(e) => { e.preventDefault(); scrollTo('sobre'); }}>Sobre</a>
-          <a href="#resultados" onClick={(e) => { e.preventDefault(); scrollTo('resultados'); }}>Resultados</a>
-          <a href="#contato" onClick={(e) => { e.preventDefault(); scrollTo('contato'); }}>Contato</a>
-          <a
-            href="https://app.gdataconsulting.com.br/login"
-            className="mobile-menu-login"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Login
-          </a>
+        <div id="mobile-menu" className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
+          {NAV_LINKS.map((l) => (
+            <Link key={l.href} href={l.href} onClick={close}>
+              {l.label}
+            </Link>
+          ))}
+          <TrackedLink href="/#contato" event="cta_demo_click" location="mobile_menu" className="mobile-menu-cta" onClick={close}>
+            Agendar Demonstração
+          </TrackedLink>
+          <PlatformLoginLink className="mobile-menu-login" location="mobile_menu" onClick={close}>
+            Acessar Plataforma
+          </PlatformLoginLink>
         </div>
       </nav>
     </header>

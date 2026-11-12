@@ -1,6 +1,10 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import TrackedLink from '@/components/TrackedLink';
+import PlatformMockup from '@/components/PlatformMockup';
+import Icon from '@/components/Icon';
+import { HERO_SCREENSHOT } from '@/lib/content';
 
 interface Particle {
   x: number;
@@ -11,23 +15,24 @@ interface Particle {
   alpha: number;
 }
 
-export default function Hero() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
+/** Animação de rede original da marca, mantida no fundo do hero. */
+function useNetworkCanvas(ref: React.RefObject<HTMLCanvasElement>) {
   useEffect(() => {
-    const canvas = canvasRef.current;
+    const canvas = ref.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     let animId: number;
     const particles: Particle[] = [];
-    const COUNT = 70;
+    const COUNT = window.innerWidth < 768 ? 35 : 70;
     const MAX_DIST = 140;
 
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
     };
     resize();
     window.addEventListener('resize', resize);
@@ -46,15 +51,15 @@ export default function Hero() {
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Move particles
-      particles.forEach((p) => {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-      });
+      if (!reduceMotion) {
+        particles.forEach((p) => {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+          if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+        });
+      }
 
-      // Draw connections
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -72,7 +77,6 @@ export default function Hero() {
         }
       }
 
-      // Draw nodes
       particles.forEach((p) => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
@@ -80,7 +84,7 @@ export default function Hero() {
         ctx.fill();
       });
 
-      animId = requestAnimationFrame(draw);
+      if (!reduceMotion) animId = requestAnimationFrame(draw);
     };
 
     draw();
@@ -89,64 +93,61 @@ export default function Hero() {
       cancelAnimationFrame(animId);
       window.removeEventListener('resize', resize);
     };
-  }, []);
+  }, [ref]);
+}
 
-  const scrollToContact = () => {
-    const el = document.getElementById('contato');
-    if (el) {
-      const top = el.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
-  };
-
-  const scrollToServices = () => {
-    const el = document.getElementById('servicos');
-    if (el) {
-      const top = el.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
-  };
+export default function Hero() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  useNetworkCanvas(canvasRef);
 
   return (
     <section className="hero" id="inicio">
-      <canvas ref={canvasRef} className="hero-canvas" />
+      <canvas ref={canvasRef} className="hero-canvas" aria-hidden="true" />
       <div className="hero-glow" />
       <div className="hero-glow-2" />
 
-      <div className="container">
+      <div className="container hero-grid">
         <div className="hero-content">
           <div className="hero-badge">
             <span className="hero-badge-dot" />
-            Consultoria Especializada em Dados & Tecnologia
+            Plataforma de automação e gestão empresarial
           </div>
 
           <h1 className="hero-title">
-            Transformamos Dados em{' '}
-            <span className="highlight">Decisões Estratégicas</span>
+            Sua empresa no controle.{' '}
+            <span className="highlight">Seus processos no automático.</span>
           </h1>
 
           <p className="hero-subtitle">
-            Da engenharia de dados à automação inteligente — ajudamos empresas a extrair o máximo
-            valor dos seus dados com soluções robustas, escaláveis e orientadas a resultados.
+            Integre seus sistemas, automatize processos e transforme suas informações em decisões
+            estratégicas com uma plataforma adaptada à realidade do seu negócio.
           </p>
 
           <div className="hero-actions">
-            <button className="btn-primary" onClick={scrollToContact}>
-              <span>Iniciar Projeto</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </button>
-            <button className="btn-outline" onClick={scrollToServices}>
-              <span>Ver Serviços</span>
-            </button>
+            <TrackedLink href="/#contato" event="cta_demo_click" location="hero" className="btn-primary btn-lg">
+              <Icon name="calendar" size={18} />
+              <span>Agendar Demonstração</span>
+            </TrackedLink>
+            <a href="#plataforma" className="btn-outline btn-lg">
+              <span>Conhecer a Plataforma</span>
+              <Icon name="arrow" size={18} />
+            </a>
           </div>
-        </div>
-      </div>
 
-      <div className="hero-scroll">
-        <div className="scroll-line" />
-        <span>scroll</span>
+          <ul className="hero-trust">
+            <li><Icon name="check" size={16} /> Demonstração gratuita</li>
+            <li><Icon name="check" size={16} /> Diagnóstico inicial sem compromisso</li>
+            <li>
+              <a href="#fundadores" className="hero-trust-link">
+                <Icon name="rocket" size={16} /> Desenvolvimento sem custo para 5 clientes fundadores
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div className="hero-visual">
+          <PlatformMockup uid="hero" variant="finance"screenshot={HERO_SCREENSHOT?.src} screenshotAlt={HERO_SCREENSHOT?.alt} priority />
+        </div>
       </div>
     </section>
   );

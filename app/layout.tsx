@@ -1,27 +1,63 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
+import './commercial.css';
+import UtmCapture from '@/components/UtmCapture';
+import JsonLd from '@/components/JsonLd';
+import { LINKEDIN_COMPANY_URL, SITE_NAME, SITE_URL, CONTACT_EMAIL } from '@/lib/site';
+
+const DEFAULT_TITLE = 'GDATA | Plataforma de Automação Empresarial e Integração de Sistemas';
+const DEFAULT_DESCRIPTION =
+  'Automatize processos, integre seus sistemas e acompanhe indicadores em uma plataforma adaptada ao seu negócio. Automação financeira, integração de sistemas e BI. Agende uma demonstração gratuita.';
+
+/** Imagem de compartilhamento. Substitua por uma arte 1200×630 em /public quando disponível. */
+const OG_IMAGE = { url: '/logo.jpg', width: 1120, height: 1120, alt: 'GDATA Consulting' };
 
 export const metadata: Metadata = {
-  title: 'GDATA Consulting | Control the Data, Shape your Destiny',
-  description:
-    'Soluções em Engenharia de Dados, Automação de Processos, Analytics, Consultoria em Tecnologia e Outsourcing. Transformamos dados em decisões estratégicas.',
-  keywords:
-    'engenharia de dados, data engineering, analytics, automação, consultoria tecnologia, outsourcing, GDATA, data consulting',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: DEFAULT_TITLE,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: DEFAULT_DESCRIPTION,
+  keywords: [
+    'plataforma de automação empresarial',
+    'automação de processos empresariais',
+    'software de automação financeira',
+    'integração de sistemas empresariais',
+    'gestão financeira automatizada',
+    'business intelligence para empresas',
+    'automatização de relatórios',
+    'engenharia de dados',
+    'consultoria em dados',
+    'GDATA',
+  ],
   authors: [{ name: 'Gabriel Anchieta de Sales' }],
+  alternates: { canonical: '/' },
   openGraph: {
-    title: 'GDATA Consulting | Control the Data, Shape your Destiny',
-    description:
-      'Transformamos dados em decisões estratégicas. Engenharia de Dados, Automação, Analytics e Consultoria.',
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    url: SITE_URL,
+    siteName: SITE_NAME,
     type: 'website',
     locale: 'pt_BR',
+    images: [OG_IMAGE],
   },
+  twitter: {
+    card: 'summary',
+    images: [OG_IMAGE.url],
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+  },
+  robots: { index: true, follow: true },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export const viewport: Viewport = {
+  themeColor: '#020917',
+  width: 'device-width',
+  initialScale: 1,
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR">
       <head>
@@ -32,7 +68,25 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <a href="#conteudo" className="skip-link">
+          Pular para o conteúdo
+        </a>
+        <UtmCapture />
+        <JsonLd
+          data={{
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: SITE_NAME,
+            url: SITE_URL,
+            logo: `${SITE_URL}/logo.jpg`,
+            email: CONTACT_EMAIL,
+            sameAs: [LINKEDIN_COMPANY_URL],
+            areaServed: 'BR',
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }
